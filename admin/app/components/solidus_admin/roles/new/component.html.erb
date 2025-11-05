@@ -14,6 +14,7 @@
 
       <%= f.checkbox_row(:permission_set_ids, options: permission_set_options[:order], row_title: t('.orders')) %>
       <%= f.checkbox_row(:permission_set_ids, options: permission_set_options[:product], row_title: t('.products')) %>
+      <%= f.checkbox_row(:permission_set_ids, options: permission_set_options[:promotion], row_title: t('.promotions')) %>
       <%= f.checkbox_row(:permission_set_ids, options: permission_set_options[:stock], row_title: t('.stock')) %>
       <%= f.checkbox_row(:permission_set_ids, options: permission_set_options[:user], row_title: t('.customers')) %>
       <%= f.checkbox_row(:permission_set_ids, options: permission_set_options[:restricted_stock], row_title: t('.restricted_stock')) %>
