@@ -99,7 +99,7 @@ module SolidusAdmin
         .where.not(id: @order.user_id)
         .order(created_at: :desc, id: :desc)
         .ransack(params[:q])
-        .result(distinct: true)
+        .result
         .includes(:default_user_bill_address, :default_user_ship_address)
         .limit(10)
 
