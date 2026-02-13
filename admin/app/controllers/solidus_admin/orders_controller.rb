@@ -13,7 +13,7 @@ module SolidusAdmin
 
     def index
       orders = apply_search_to(
-        Spree::Order.order(created_at: :desc, id: :desc),
+        Spree::Order.includes(:line_items).order(completed_at: :desc, id: :desc),
         param: :q
       )
 
