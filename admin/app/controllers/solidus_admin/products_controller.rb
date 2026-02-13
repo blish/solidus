@@ -13,13 +13,17 @@ module SolidusAdmin
 
     def index
       products = apply_search_to(
-        Spree::Product.includes(:master, :variants),
+        Spree::Product.includes(
+          :variant_images,
+          master: :prices,
+          variants: :prices,
+        ),
         param: :q
       )
 
       set_page_and_extract_portion_from(
         products,
-        ordered_by: {updated_at: :desc, id: :desc}
+        ordered_by: {available_on: :desc, id: :desc}
       )
 
       respond_to do |format|
