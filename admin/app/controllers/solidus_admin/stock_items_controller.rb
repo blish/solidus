@@ -33,7 +33,14 @@ module SolidusAdmin
 
     def resource_class = Spree::StockItem
 
-    def resources_collection = Spree::StockItem.reorder(nil)
+    def resources_collection
+      Spree::StockItem
+        .reorder(nil)
+        .includes(
+          :stock_location,
+          variant: [:option_values, :images, { product: :variant_images }]
+        )
+    end
 
     def resources_sorting_options
       {

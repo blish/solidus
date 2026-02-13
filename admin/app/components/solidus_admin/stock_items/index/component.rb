@@ -46,7 +46,11 @@ class SolidusAdmin::StockItems::Index::Component < SolidusAdmin::UI::Pages::Inde
         combinator: "or",
         attribute: "variant_id",
         predicate: "eq",
-        options: Spree::Variant.all.map do |variant|
+        options: Spree::Variant.joins(:product)
+          .includes(:product)
+          .limit(100)
+          .order(id: :desc)
+          .map do |variant|
           [
             variant.descriptive_name,
             variant.id
