@@ -15,7 +15,7 @@ module SolidusAdmin
 
     def index
       users = apply_search_to(
-        Spree.user_class.order(created_at: :desc, id: :desc),
+        Spree.user_class.includes(:spree_roles).order(email: :asc),
         param: :q
       )
 
