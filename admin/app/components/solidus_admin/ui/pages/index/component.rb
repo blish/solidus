@@ -84,7 +84,11 @@ class SolidusAdmin::UI::Pages::Index::Component < SolidusAdmin::BaseComponent
   end
 
   def next_page_path
-    solidus_admin.url_for(**request.params, page: @page.next_param, only_path: true) unless @page.last?
+    # Avoid calling @page.last? which triggers an expensive COUNT query
+    # on the full dataset. Instead, check if we got a full page of records.
+    return if rows.size < @page.recordset.ratios[@page.number]
+
+    solidus_admin.url_for(**request.params, page: @page.next_param, only_path: true)
   end
 
   def search_options

@@ -83,11 +83,19 @@ class SolidusAdmin::Users::Index::Component < SolidusAdmin::UsersAndRoles::Compo
       },
       {
         header: :order_count,
-        data: ->(user) { user.order_count }
+        data: ->(user) {
+          user.try(:prefetched_order_count) || user.order_count
+        }
       },
       {
         header: :lifetime_value,
-        data: -> { _1.display_lifetime_value.to_html }
+        data: ->(user) {
+          if user.has_attribute?(:prefetched_lifetime_value)
+            Spree::Money.new(user.prefetched_lifetime_value, currency: Spree::Config[:currency]).to_html
+          else
+            user.display_lifetime_value.to_html
+          end
+        }
       },
       {
         header: :last_active,

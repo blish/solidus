@@ -10,12 +10,19 @@ module SolidusAdmin
     search_scope(:all, default: true)
     search_scope(:customers) { _1.left_outer_joins(:role_users).where(role_users: {id: nil}) }
     search_scope(:admin) { _1.joins(:role_users) }
-    search_scope(:with_orders) { _1.joins(:orders) }
-    search_scope(:without_orders) { _1.left_outer_joins(:orders).where(orders: {id: nil}) }
+    search_scope(:with_orders) { _1.where("EXISTS (SELECT 1 FROM spree_orders WHERE spree_orders.user_id = spree_users.id)") }
+    search_scope(:without_orders) { _1.where("NOT EXISTS (SELECT 1 FROM spree_orders WHERE spree_orders.user_id = spree_users.id)") }
 
     def index
       users = apply_search_to(
-        Spree.user_class.includes(:spree_roles).order(email: :asc),
+        Spree.user_class
+          .includes(:spree_roles)
+          .select(
+            "#{Spree.user_class.table_name}.*",
+            "(SELECT COUNT(*) FROM spree_orders WHERE spree_orders.user_id = #{Spree.user_class.table_name}.id AND spree_orders.completed_at IS NOT NULL) AS prefetched_order_count",
+            "(SELECT COALESCE(SUM(spree_orders.total), 0) FROM spree_orders WHERE spree_orders.user_id = #{Spree.user_class.table_name}.id AND spree_orders.completed_at IS NOT NULL) AS prefetched_lifetime_value"
+          )
+          .order(email: :asc),
         param: :q
       )
 
