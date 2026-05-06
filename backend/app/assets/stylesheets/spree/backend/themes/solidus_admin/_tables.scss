@@ -13,21 +13,22 @@ table.index {
     border-top-right-radius: 4px;
   }
 
-  > tbody > tr:last-child > td:first-child {
+  > tbody > tr:last-child > :first-child {
     border-bottom-left-radius: 4px;
   }
 
-  > tbody > tr:last-child > td:last-child {
+  > tbody > tr:last-child > :last-child {
     border-bottom-right-radius: 4px;
   }
 
   > thead > tr > th {
     border-top: 1px solid $solidus-admin-gray-100;
-    border-bottom: none
+    border-bottom: none;
   }
 
   > thead > tr > th,
-  > tbody > tr > td {
+  > tbody > tr > td,
+  > tbody > tr > th {
     &:first-child {
       border-left: 1px solid $solidus-admin-gray-100;
     }
@@ -37,19 +38,20 @@ table.index {
     }
   }
 
-  > tbody > tr:last-child > td {
+  > tbody > tr:last-child > td,
+  > tbody > tr:last-child > th {
     border-bottom: 1px solid $solidus-admin-gray-100;
   }
 
   // Colors
   > th {
     background-color: $solidus-admin-gray-15;
-      color: $solidus-admin-gray-600;
+    color: $solidus-admin-gray-600;
   }
 
   > td {
     background-color: $solidus-admin-white;
-      color: $solidus-admin-black;
+    color: $solidus-admin-black;
   }
 }
 
