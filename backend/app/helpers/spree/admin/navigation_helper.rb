@@ -136,28 +136,30 @@ module Spree
         link_to(icon_tag + text, url, options)
       end
 
-      def solidus_icon(icon_name)
+      def solidus_icon(icon_name, size: nil)
         if icon_name&.include?("fa-")
           icon_name = icon_name.gsub(/(fa\s|fa-)/, "")
           Spree.deprecator.warn "Using FontAwesome icon classes with solidus_icon is deprecated. Please use just `#{icon_name}` instead."
         end
         icon = icon_for(icon_name)
         if icon&.starts_with?("ri-")
-          remix_icon(icon)
+          remix_icon(icon, size: size)
         elsif icon_name
-          content_tag(:i, "", class: "fa fa-#{icon_name}")
+          size_class = "fa-#{size}" if size
+          content_tag(:i, "", class: "fa fa-#{icon_name} #{size_class}".strip)
         else
           ""
         end
       end
 
-      def remix_icon(icon_name)
+      def remix_icon(icon_name, size: nil)
         svg_map = image_path("spree/backend/themes/solidus_admin/remixicon.symbol.svg")
+        size_class = "icon-#{size}" if size
         tag.svg(
           tag.use(href: "#{svg_map}##{icon_name}"),
           "aria-hidden": true,
           style: "fill: currentColor",
-          class: "icon"
+          class: "icon #{size_class}".strip
         )
       end
 

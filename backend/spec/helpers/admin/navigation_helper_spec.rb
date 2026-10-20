@@ -202,6 +202,30 @@ describe Spree::Admin::NavigationHelper, type: :helper do
           end
         end
       end
+
+      context "if given a size" do
+        subject(:solidus_icon) { helper.solidus_icon("copy", size: "5x") }
+
+        context "when updated navbar is disabled" do
+          before do
+            stub_spree_preferences(Spree::Backend::Config, admin_updated_navbar: false)
+          end
+
+          it "adds the fa size class" do
+            is_expected.to eq '<i class="fa fa-copy fa-5x"></i>'
+          end
+        end
+
+        context "when updated navbar is enabled" do
+          before do
+            stub_spree_preferences(Spree::Backend::Config, admin_updated_navbar: true)
+          end
+
+          it "adds the icon size class" do
+            is_expected.to have_css "svg.icon.icon-5x"
+          end
+        end
+      end
     end
 
     context "if not given nil icon_name" do

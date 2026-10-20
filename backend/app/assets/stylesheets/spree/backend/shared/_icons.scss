@@ -95,6 +95,11 @@ a {
     width: 16px;
     height: 16px;
     fill: currentColor;
+
+    &.icon-5x {
+      width: 64px;
+      height: 64px;
+    }
   }
 
   .icon_button,

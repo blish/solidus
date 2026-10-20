@@ -8,6 +8,7 @@ module Spree
       "cancel" => "ri-close-line",
       "capture" => "ri-thumb-up-line",
       "check" => "ri-check-line",
+      "cloud-upload" => "ri-upload-cloud-2-line",
       "copy" => "ri-file-copy-line",
       "edit" => "ri-edit-line",
       "email" => "ri-mail-line",
