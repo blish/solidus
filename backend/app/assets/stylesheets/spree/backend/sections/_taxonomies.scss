@@ -12,6 +12,7 @@
   }
 
   .taxon {
+    display: flex;
     background-color: $color-light;
     border: 1px solid $color-border;
     border-radius: $border-radius;
@@ -19,6 +20,12 @@
     font-weight: $font-weight-bold;
     margin: 5px 0;
     padding: 0.5em;
+    align-items: center;
+    gap: 0.5em;
+
+    .actions {
+      margin-left: auto;
+    }
 
     &.sortable {
       cursor: move;

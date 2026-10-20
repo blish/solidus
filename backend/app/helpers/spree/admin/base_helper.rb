@@ -26,7 +26,7 @@ module Spree
 
       def admin_hint(title, text)
         content_tag(:span, class: "hint-tooltip", title:, data: {content: text}) do
-          content_tag(:i, "", class: "fa fa-info-circle")
+          solidus_icon("info-circle")
         end
       end
 

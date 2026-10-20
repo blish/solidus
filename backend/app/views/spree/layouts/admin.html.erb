@@ -3,7 +3,7 @@
   <head data-hook="admin_inside_head">
     <%= render 'spree/admin/shared/head' %>
   </head>
-  <body class="admin <%= "admin-nav-hidden" if !Spree::Backend::Config.admin_updated_navbar && cookies[:admin_nav_hidden] == "true" %>">
+  <body class="admin<%= Spree::Backend::Config.admin_updated_navbar && " updated-navbar" %><%= " admin-nav-hidden" if !Spree::Backend::Config.admin_updated_navbar && cookies[:admin_nav_hidden] == "true" %>">
     <% if Spree::Backend::Config.admin_updated_navbar  %>
       <%= render partial: 'spree/admin/shared/navigation_solidus_admin' %>
     <% else %>

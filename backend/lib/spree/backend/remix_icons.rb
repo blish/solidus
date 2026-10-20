@@ -3,6 +3,7 @@
 module Spree
   module Backend
     REMIX_ICONS = {
+      "arrows" => "ri-drag-move-2-line",
       "arrows-h" => "ri-arrow-left-right-line",
       "calendar" => "ri-calendar-line",
       "cancel" => "ri-close-line",
@@ -13,6 +14,7 @@ module Spree
       "edit" => "ri-edit-line",
       "email" => "ri-mail-line",
       "file" => "ri-file-line",
+      "info-circle" => "ri-information-line",
       "lock" => "ri-lock-line",
       "ok" => "ri-check-line",
       "plus" => "ri-add-line",
@@ -20,6 +22,7 @@ module Spree
       "remove" => "ri-delete-bin-7-line",
       "reply" => "ri-reply-line",
       "send" => "ri-plane-plane-line",
+      "sort" => "ri-expand-up-down-line",
       "th-large" => "ri-function-line",
       "trash" => "ri-delete-bin-7-line",
       "unlock" => "ri-lock-unlock-line",
