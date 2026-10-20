@@ -67,7 +67,7 @@ describe "Option Types", type: :feature do
     expect(page).to have_css("tbody#option_values tr", count: 1)
     within("tbody#option_values") do
       accept_alert do
-        find(".fa-trash").click
+        find(icon_selector("trash")).click
       end
     end
     # Assert that the field is hidden automatically
@@ -102,7 +102,7 @@ describe "Option Types", type: :feature do
     # Remove default option type
     within("tbody#option_values") do
       within_row(1) do
-        find(".fa-trash").click
+        find(icon_selector("trash")).click
       end
     end
     # Assert that the field is hidden automatically
@@ -110,7 +110,7 @@ describe "Option Types", type: :feature do
 
     # Remove added option type
     within("tbody#option_values") do
-      find(".fa-trash").click
+      find(icon_selector("trash")).click
     end
     # Assert that the field is hidden automatically
     expect(page).to have_css("tbody#option_values tr", count: 0)

@@ -38,7 +38,7 @@ describe "Payments", type: :feature do
         expect(page).not_to have_content("Cannot perform requested operation")
         expect(page).to have_content("Payment Updated")
         within_row(1) do
-          expect(page).to have_selector(".fa-reply")
+          expect(page).to have_selector(icon_selector("reply"))
         end
       end
 
@@ -49,7 +49,7 @@ describe "Payments", type: :feature do
 
       it "voids refund option for incomplete payments" do
         within_row(1) do
-          expect(page).not_to have_selector(".fa-reply")
+          expect(page).not_to have_selector(icon_selector("reply"))
         end
       end
     end
@@ -96,7 +96,7 @@ describe "Payments", type: :feature do
           within "#payments" do
             expect(page).to have_selector(".pill-pending", count: 2)
             within "#payment_#{payment.id}" do
-              find(".fa-void").click
+              find(icon_selector("void")).click
             end
           end
 
@@ -110,7 +110,7 @@ describe "Payments", type: :feature do
           end
 
           within "#payment_#{second_payment.id}" do
-            find(".fa-void").click
+            find(icon_selector("void")).click
           end
 
           within "#payments" do
@@ -197,7 +197,7 @@ describe "Payments", type: :feature do
 
       it "does not allow the amount to be edited" do
         within_row(1) do
-          expect(page).not_to have_selector(".fa-edit")
+          expect(page).not_to have_selector(icon_selector("edit"))
         end
       end
     end

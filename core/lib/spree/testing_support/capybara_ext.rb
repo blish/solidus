@@ -4,7 +4,7 @@ module Spree
   module TestingSupport
     module CapybaraExt
       def click_icon(type)
-        el = find(".fa-#{type}", visible: :all)
+        el = find(icon_selector(type), visible: :all)
         begin
           el.click
         rescue Selenium::WebDriver::Error::ElementClickInterceptedError
@@ -13,6 +13,15 @@ module Spree
           page.execute_script('arguments[0].scrollIntoView({block: "center"});', el.native)
           page.execute_script("arguments[0].click();", el.native)
         end
+      end
+
+      def icon_selector(type)
+        remix_icon = defined?(Spree::Backend::REMIX_ICONS) && Spree::Backend::REMIX_ICONS[type.to_s]
+        return ".fa-#{type}" unless remix_icon
+
+        # Select the surrounding link or button, the rack_test driver cannot click an svg.
+        use = %(use[href$="##{remix_icon}"])
+        ".fa-#{type}, a:has(#{use}), button:has(#{use})"
       end
 
       def eventually_fill_in(field, options = {})

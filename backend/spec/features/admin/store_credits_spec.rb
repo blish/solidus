@@ -62,7 +62,7 @@ describe "Store credits admin" do
       click_link "Users"
       click_link store_credit.user.email
       click_link "Store Credit"
-      page.find(".sc-table td.actions a.fa-edit").click
+      page.find(".sc-table td.actions").find(icon_selector("edit")).click
     end
 
     it "shows the store credit's information" do
@@ -118,7 +118,7 @@ describe "Store credits admin" do
     end
 
     it "updates the store credit's amount" do
-      page.find(".sc-table td.actions a.fa-edit").click
+      page.find(".sc-table td.actions").find(icon_selector("edit")).click
       expect(page).to have_content "Store credit history"
       click_link "Change amount"
       expect(page).to have_content "Editing store credit amount"
