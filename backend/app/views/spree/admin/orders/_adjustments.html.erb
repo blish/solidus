@@ -1,6 +1,10 @@
 <fieldset class="no-border-bottom">
   <legend><%= title %></legend>
-  <table>
+  <table class="index">
+    <colgroup>
+      <col style="width: 75%;">
+      <col style="width: 25%;">
+    </colgroup>
     <thead>
       <tr>
         <th><%= Spree::Adjustment.human_attribute_name(:name) %></th>
