@@ -147,7 +147,7 @@ describe "Adjustments", type: :feature do
 
         it "should not be possible" do
           within("table tr", text: "Rebate") do
-            expect(page).not_to have_css(".fa-trash")
+            expect(page).not_to have_css(icon_selector("trash"))
           end
         end
       end

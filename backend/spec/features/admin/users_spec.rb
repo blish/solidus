@@ -362,7 +362,7 @@ describe "Users", type: :feature do
 
       it "can't be deleted" do
         within "#spree_user_#{an_user.id}" do
-          expect(page).not_to have_selector(".fa-trash")
+          expect(page).not_to have_selector(icon_selector("trash"))
         end
       end
     end

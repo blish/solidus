@@ -73,4 +73,22 @@ RSpec.describe Spree::TestingSupport::CapybaraExt do
       end
     end
   end
+
+  describe "#icon_selector" do
+    it "selects the fontawesome icon" do
+      expect(page_object.icon_selector(:edit)).to eq ".fa-edit"
+    end
+
+    context "when the icon maps to a remix icon" do
+      before do
+        stub_const("Spree::Backend::REMIX_ICONS", {"edit" => "ri-edit-line"})
+      end
+
+      it "also selects links and buttons containing the remix icon" do
+        expect(page_object.icon_selector(:edit)).to eq(
+          '.fa-edit, a:has(use[href$="#ri-edit-line"]), button:has(use[href$="#ri-edit-line"])'
+        )
+      end
+    end
+  end
 end

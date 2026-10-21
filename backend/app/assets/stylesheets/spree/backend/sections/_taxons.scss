@@ -1,5 +1,11 @@
 #taxon_products {
-  .product_name {
-    margin-left: 1em;
+  .sort_item {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    .float-right {
+      margin-left: auto;
+    }
   }
 }

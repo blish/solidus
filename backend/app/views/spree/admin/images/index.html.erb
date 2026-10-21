@@ -22,7 +22,7 @@
       <%= form_for [:admin, @product, Spree::Image.new],
           html: { multipart: true, id: 'upload-form' } do |f| %>
         <label class="upload">
-          <i class="fa fa-5x fa-cloud-upload"></i>
+          <%= solidus_icon("cloud-upload", size: "5x") %>
           <p>
             <span class="button"><%= t(".choose_files") %></span>
           </p>

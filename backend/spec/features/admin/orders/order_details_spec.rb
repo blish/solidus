@@ -72,7 +72,7 @@ describe "Order Details", type: :feature, js: true do
           before do
             create :payment, order:, amount: order.amount
             visit spree.admin_order_payments_path(order)
-            find(".fa-capture").click
+            find(icon_selector("capture")).click
           end
 
           it "adds an item creating a new shipment and changes the payment status" do
@@ -353,8 +353,8 @@ describe "Order Details", type: :feature, js: true do
 
               expect(page.current_path).to eq(spree.edit_admin_order_path(order))
               expect(page).not_to have_text "Cart"
-              expect(page).not_to have_selector(".fa-arrows-h")
-              expect(page).not_to have_selector(".fa-trash")
+              expect(page).not_to have_selector(icon_selector("arrows-h"))
+              expect(page).not_to have_selector(icon_selector("trash"))
             end
 
             context "order has shipped" do
