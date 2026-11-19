@@ -7,6 +7,8 @@ module Spree
     # Decorates ActiveStorage attachment to add methods expected by Solidus'
     # Paperclip-oriented attachment support.
     class Attachment
+      ANIMATABLE_CONTENT_TYPES = %w[image/gif image/webp].freeze
+
       delegate_missing_to :@attachment
 
       attr_reader :attachment
@@ -32,6 +34,7 @@ module Spree
         transformation = @transformations[style] || default_transformation(width, height)
 
         @attachment.variant({
+          **loader_options,
           saver: {
             strip: true
           }
@@ -82,6 +85,16 @@ module Spree
 
       def default_transformation(width, height)
         {resize_to_limit: [width, height]}
+      end
+
+      # Vips only loads the first frame unless told otherwise. Limited to
+      # animatable types, because any change to the transformations changes
+      # the variant digest and would re-process every existing variant.
+      def loader_options
+        return {} unless ActiveStorage.variant_processor == :vips
+        return {} unless content_type.in?(ANIMATABLE_CONTENT_TYPES)
+
+        {loader: {n: -1}}
       end
     end
   end
